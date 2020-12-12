@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    slf4j_version = '1.7.25'
+    junit_version = '5.6.2'
+    junitPlatformVersion = '1.5.2'
+    assertjVersion = '3.18.+'
+    webDriverVersion= '3.141.59'
+    lombokVersion = '1.18.12'
+}
+
+dependencies {
+    implementation "org.seleniumhq.selenium:selenium-java:${webDriverVersion}"
+    implementation "org.slf4j:slf4j-api:${slf4j_version}"
+    implementation "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation "org.junit.platform:junit-platform-engine:${junitPlatformVersion}"
+    testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junit_version}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${junit_version}"
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+
+}
