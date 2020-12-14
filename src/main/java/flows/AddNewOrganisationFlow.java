@@ -1,7 +1,6 @@
 package flows;
 
 import org.openqa.selenium.WebDriver;
-
 import model.Organisation;
 import pages.AddOrganisation;
 
@@ -17,11 +16,14 @@ public class AddNewOrganisationFlow
     this.driver = driver;
   }
 
-  public void addNewOrganization(Organisation organisation)
-      throws InterruptedException
+  public DashboardFlow addNewOrganization(Organisation organisation)
   {
     addOrganisation.setBusinessName(organisation.getBusinessName());
     addOrganisation.setIndustry(organisation.getIndustry());
     addOrganisation.setCountry(organisation.getCountry());
+    addOrganisation.setHaveOrHaveNotEmployees(organisation.isHasEmployees());
+    addOrganisation.setRegisteredForGST(organisation.isRegisteredForGST());
+    addOrganisation.selectStartTrialButton();
+    return new DashboardFlow(this.driver);
   }
 }

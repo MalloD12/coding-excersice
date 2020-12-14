@@ -10,3 +10,5 @@ gradlew.bat
 settings.gradle
 .idea/
 debug.log
+
+out/

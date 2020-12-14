@@ -1,8 +1,6 @@
 package flows;
 
-
 import org.openqa.selenium.WebDriver;
-
 import pages.Login;
 import testdata.LoginTestData;
 
