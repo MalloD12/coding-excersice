@@ -1,6 +1,5 @@
 package testdata;
 
-
 public enum LoginTestData
 {
   TEST_USER("testcodexercise@gmail.com", "Testing123!");

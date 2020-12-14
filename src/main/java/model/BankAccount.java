@@ -15,4 +15,5 @@ public class BankAccount
   private String accountName;
   private String accountType;
   private String accountNumber;
+  private String last4DigitsCC;
 }

@@ -1,19 +1,36 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import model.Organisation;
+import constants.TestTimeOutSettings;
+import driver.WebDriverUtils;
+import model.BankAccount;
 
 public class Dashboard
 {
   private WebDriver driver;
   private static final Logger LOG = LoggerFactory.getLogger(Dashboard.class);
 
-  private By navigationMenu = By.xpath(String.format("//span[contains(text(),'%s')]", Organisation.getParentOrganisation()));
+  private By navigationMenu = By.xpath("//div[@class='xnav-appbutton--body']");
+
   private By addNewOrganization = By.xpath("//a[contains(text(),'Add a new organisation')]");
+
+  private By changeOrganization = By.xpath("//button[contains(text(),'Change organisation')]");
+
+  private By accounting = By.xpath("//button[contains(text(),'Accounting')]");
+
+  private By bankAccount = By.xpath("//a[contains(text(),'Bank accounts')]");
+
+  private By bankAccountWidget = By.className("xdash-shared__container-toggle___4gS60");
+
+  private By dashboardTableContent = By.xpath("//div[@class='xdash-Dashboard__table___vFe0J']");
 
   public Dashboard(WebDriver driver)
   {
@@ -29,6 +46,37 @@ public class Dashboard
   public void selectAddNewOrganisationOption()
   {
     LOG.info("Dashboard: Add a new organisation option selected.");
+    if(!WebDriverUtils.isElementDisplayed(this.driver, addNewOrganization))
+    {
+      this.driver.findElement(changeOrganization).click();
+    }
     this.driver.findElement(addNewOrganization).click();
+  }
+
+  public void selectAccountingOption()
+  {
+    LOG.info("Dashboard: Accounting navigation option selected.");
+    //TODO: Implement a generic method.
+    new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(accounting)).click();
+  }
+
+  public void selectBankAccountOption()
+  {
+    LOG.info("Dashboard: Accounting navigation option selected.");
+    new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(bankAccount)).click();
+  }
+
+  public boolean isBankAccountDisplayed(BankAccount bankDetails)
+  {
+    List<WebElement> listBankAccounts = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.presenceOfAllElementsLocatedBy(bankAccountWidget));
+    for(WebElement dashboardElement : listBankAccounts)
+    {
+      if(!bankDetails.getAccountType().equalsIgnoreCase("Credit Card") && dashboardElement.getText().contains(String.format("%s\n%s", bankDetails.getAccountName(), bankDetails.getAccountNumber())))
+        return true;
+      else
+        if(bankDetails.getAccountType().equalsIgnoreCase("Credit Card") && dashboardElement.getText().contains(String.format("%s\n%s", bankDetails.getAccountName(), bankDetails.getLast4DigitsCC())))
+          return true;
+    }
+    return false;
   }
 }

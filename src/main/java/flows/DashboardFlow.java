@@ -1,7 +1,7 @@
 package flows;
 
 import org.openqa.selenium.WebDriver;
-
+import model.BankAccount;
 import pages.Dashboard;
 
 public class DashboardFlow
@@ -27,4 +27,16 @@ public class DashboardFlow
     return new AddNewOrganisationFlow(this.driver);
   }
 
+  public AddBankAccountFlow navigateToBankAccountManagement()
+  {
+    dashboard.selectAccountingOption();
+    dashboard.selectBankAccountOption();
+    return new AddBankAccountFlow(this.driver);
+  }
+
+  public boolean bankAccountAddedDisplaysOnDashboard(BankAccount bankDetails)
+  {
+    //TODO: Verify if dashboard displays
+    return dashboard.isBankAccountDisplayed(bankDetails);
+  }
 }
