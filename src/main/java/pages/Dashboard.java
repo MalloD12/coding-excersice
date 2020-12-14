@@ -30,8 +30,6 @@ public class Dashboard
 
   private By bankAccountWidget = By.className("xdash-shared__container-toggle___4gS60");
 
-  private By dashboardTableContent = By.xpath("//div[@class='xdash-Dashboard__table___vFe0J']");
-
   public Dashboard(WebDriver driver)
   {
     this.driver = driver;
@@ -40,7 +38,8 @@ public class Dashboard
   public void selectNavigationMenu()
   {
     LOG.info("Dashboard: Navigation menu selected.");
-    this.driver.findElement(navigationMenu).click();
+    WebElement navigationMenuElement = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(navigationMenu));
+    navigationMenuElement.click();
   }
 
   public void selectAddNewOrganisationOption()
@@ -56,14 +55,15 @@ public class Dashboard
   public void selectAccountingOption()
   {
     LOG.info("Dashboard: Accounting navigation option selected.");
-    //TODO: Implement a generic method.
-    new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(accounting)).click();
+    WebElement accountingElement = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(accounting));
+    accountingElement.click();
   }
 
   public void selectBankAccountOption()
   {
     LOG.info("Dashboard: Accounting navigation option selected.");
-    new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(bankAccount)).click();
+    WebElement bankAccountElement = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(bankAccount));
+    bankAccountElement.click();
   }
 
   public boolean isBankAccountDisplayed(BankAccount bankDetails)

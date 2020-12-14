@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -83,4 +84,21 @@ public final class WebDriverUtils
     }
     return isPageLoaded;
   }
+
+  public static boolean isElementPresent(WebDriver driver, By locator)
+  {
+    boolean isPresent;
+    try
+    {
+      WebElement element = new WebDriverWait(driver, TestTimeOutSettings.MIN_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locator));
+      isPresent = element != null;
+    }
+    catch (TimeoutException e)
+    {
+      isPresent = false;
+    }
+
+    return isPresent;
+  }
+
 }
