@@ -2,8 +2,13 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import constants.TestTimeOutSettings;
 
 public class Login
 {
@@ -25,19 +30,22 @@ public class Login
   public void setUsername(String userEmail)
   {
     LOG.info("Login - Entering user email: {}", userEmail);
-    this.driver.findElement(username).sendKeys(userEmail);
+    WebElement usernameElement = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(username));
+    usernameElement.sendKeys(userEmail);
   }
 
   public void setPassword(String userPassword)
   {
     LOG.info("Login - Entering user password: {}", userPassword);
-    this.driver.findElement(password).sendKeys(userPassword);
+    WebElement passwordElement = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(password));
+    passwordElement.sendKeys(userPassword);
   }
 
   public void selectLoginBtn()
   {
     LOG.info("Login - Log in button selected.");
-    this.driver.findElement(loginBtn).click();
+    WebElement loginBtndElement = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(loginBtn));
+    loginBtndElement.click();
   }
 
 }

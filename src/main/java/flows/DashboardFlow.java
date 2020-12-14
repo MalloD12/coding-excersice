@@ -36,7 +36,6 @@ public class DashboardFlow
 
   public boolean bankAccountAddedDisplaysOnDashboard(BankAccount bankDetails)
   {
-    //TODO: Verify if dashboard displays
     return dashboard.isBankAccountDisplayed(bankDetails);
   }
 }

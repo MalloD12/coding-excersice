@@ -17,7 +17,16 @@ public class AddBankAccountFlow
 
   public AddBankAccountFlow addBankAccount(BankAccount bankAccount)
   {
-    addBankAccount.selectAddBankAccountButton();
+    selectAddBankAccountButton();
+    completeBankDetails(bankAccount);
+    addBankAccount.selectContinueButton();
+    addBankAccount.allowBankToSendTransactions();
+    addBankAccount.uploadFormLater();
+    return this;
+  }
+
+  public AddBankAccountFlow completeBankDetails(BankAccount bankAccount)
+  {
     addBankAccount.selectBankOption(bankAccount.getBankBrand());
     addBankAccount.setAccountName(bankAccount.getAccountName());
     addBankAccount.selectAccountType(bankAccount.getAccountType());
@@ -25,9 +34,19 @@ public class AddBankAccountFlow
       addBankAccount.setCreditCardLast4Digits(bankAccount.getLast4DigitsCC());
     else
       addBankAccount.setAccountNumber(bankAccount.getAccountNumber());
+
+    return this;
+  }
+
+  public AddBankAccountFlow submitBankDetails()
+  {
     addBankAccount.selectContinueButton();
-    addBankAccount.allowBankToSendTransactions();
-    addBankAccount.uploadFormLater();
+    return this;
+  }
+
+  public AddBankAccountFlow selectAddBankAccountButton()
+  {
+    addBankAccount.selectAddBankAccountButton();
     return this;
   }
 
@@ -35,5 +54,10 @@ public class AddBankAccountFlow
   {
     addBankAccount.goBackToDashboard();
     return new DashboardFlow(this.driver);
+  }
+
+  public boolean bankAccountHasBeenAddedSuccessfully()
+  {
+    return addBankAccount.hasBeenAddedSuccessfully();
   }
 }

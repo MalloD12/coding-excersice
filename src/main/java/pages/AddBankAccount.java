@@ -15,7 +15,7 @@ public class AddBankAccount
   private WebDriver driver;
   private static final Logger LOG = LoggerFactory.getLogger(AddBankAccount.class);
 
-  private By addBankAccount = By.xpath("//a[@id='ext-gen16']");
+  private By addBankAccount = By.xpath("//span[@data-automationid='Add Bank Account-button']");
 
   private By searchYourBank = By.xpath("//input[@id='xui-searchfield-1018-inputEl']");
 
@@ -78,7 +78,6 @@ public class AddBankAccount
   {
     LOG.info("Add Bank Account - Set Credit Card last 4 digits: {}.", last4DigitsCC);
     WebElement cc4DigitsElement = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(last4DigitsCC));
-    cc4DigitsElement.click();
     cc4DigitsElement.sendKeys(last4Digits);
   }
 
@@ -86,7 +85,6 @@ public class AddBankAccount
   {
     LOG.info("Add Bank Account - Set Account Number: {}.", bankAccountNumber);
     WebElement accountNumberElement = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(accountNumber));
-    accountNumberElement.click();
     accountNumberElement.sendKeys(bankAccountNumber);
   }
 
@@ -118,5 +116,10 @@ public class AddBankAccount
     LOG.info("Add Bank Account - Select 'Go to dashboard' button.");
     WebElement goToDashboardElement = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(goToDashboard));
     goToDashboardElement.click();
+  }
+
+  public boolean hasBeenAddedSuccessfully()
+  {
+    return  WebDriverUtils.isElementPresent(this.driver, iGotAForm);
   }
 }
