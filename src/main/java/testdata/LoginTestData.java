@@ -2,7 +2,7 @@ package testdata;
 
 public enum LoginTestData
 {
-  TEST_USER("testcodexercise@gmail.com", "Testing123!");
+  TEST_USER("xero.codetest@gmail.com", "Testing123!");
 
   private String userName;
 
