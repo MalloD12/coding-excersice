@@ -21,7 +21,7 @@ Else, if using any versioning tool (i.e. SourceTree) use below link from there w
 https://github.com/MalloD12/coding-excersice.git
 ```
 
-###Test Execution
+### Test Execution
 - Tests scripts have been implemented as part of ```test``` module which are going to be executed when building the project.
 
 For doing that we can simply execute below gradle command from project source directory:
@@ -35,8 +35,8 @@ or by running:
 gradlew test
 ```
 
-###Test results 
+### Test results 
 Can be found in `./coding-excersice/build/reports/tests/test/index.html`
 
-###Lombok Library Utilization
+### Lombok Library Utilization
 To configure lombok library see: https://www.baeldung.com/lombok-ide
