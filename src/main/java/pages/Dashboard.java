@@ -68,6 +68,7 @@ public class Dashboard
 
   public boolean isBankAccountDisplayed(BankAccount bankDetails)
   {
+    LOG.info("Dashboard: Verifying bank account: {} just added displays on Dashboard.", bankDetails.toString());
     List<WebElement> listBankAccounts = new WebDriverWait(this.driver, TestTimeOutSettings.NORMAL_WAIT_SECONDS).until(ExpectedConditions.presenceOfAllElementsLocatedBy(bankAccountWidget));
     for(WebElement dashboardElement : listBankAccounts)
     {
