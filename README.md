@@ -9,6 +9,7 @@ As starting point I assumed default organization as well as user credentials has
 
 - Created a BaseTest class to address WebDriver configuration in which I decided to quite driver as part of a @AfterEach method, this was to avoid having to implement 
 Logout flow. 
+- To simplify test flow I've decided to keep moving forward on add bank account flow by not downloading the form.
 
 ### Project Download
 If SSH public key is set do:
